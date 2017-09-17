@@ -26,7 +26,7 @@ copyright = "&copy; Martin Lee 2017"
   # Disqus shortname
 #  disqus = ""
   # Google Analytics API key.
-#  ga_api_key = "Your Google Analytics tracking id"
+  ga_api_key = "UA-90843406-3"
   author = "Martin Lee"
   authorwebsite = "http://martinlee.org"
 #  avatar = "/path/to/avatar"

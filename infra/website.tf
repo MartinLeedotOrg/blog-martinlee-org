@@ -60,6 +60,15 @@ resource "aws_cloudfront_distribution" "frontend" {
   origin {
     domain_name = "${aws_s3_bucket.website.id}.${aws_s3_bucket.website.website_domain}"
     origin_id = "S3origin"
+
+    # Using a custom origin config so we can take advantage of the bucket automatically pointing /posts/
+    # to /posts/index.html
+    custom_origin_config {
+      http_port = "80"
+      https_port = "443"
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols = ["TLSv1"]
+    }
   }
 
   restrictions {
@@ -77,6 +86,7 @@ resource "aws_cloudfront_distribution" "frontend" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods = ["GET", "HEAD"]
     target_origin_id = "S3origin"
+    compress = true
     forwarded_values {
       query_string = true
       cookies {

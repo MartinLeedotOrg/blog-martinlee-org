@@ -1,7 +1,7 @@
 build:
 	cd ./blog && hugo -t hugo_theme_pickles
 
-deploy:
+deploy: build
 	aws s3 sync ./blog/public/ s3://blog-martinlee-org/
 
 dev:
