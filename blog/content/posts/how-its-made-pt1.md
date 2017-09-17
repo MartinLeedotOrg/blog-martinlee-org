@@ -5,7 +5,7 @@ draft: false
 ---
 
 ### Intro
-First thing first, we're going to need some infrastructure to host the blog. I've decided to over-engineer this because I enjoy that sort of thing. I'm going to host it entirely in AWS.
+First thing first, we're going to need some infrastructure to host the blog. I've decided to over-engineer this because I enjoy that sort of thing. I'm going to host it entirely in AWS, and as a static site (think Hugo, Jekyll, etc.) By the time your reading this - I'll have made a decision on what to use, but this post was drafted while I was still deciding.
 
 #### Components:
  * S3 Bucket to host the static blog
@@ -19,14 +19,15 @@ First thing first, we're going to need some infrastructure to host the blog. I'v
 ### Setup
 We'll use terraform to generate everything. I've uploaded my terraform files to [GitHub](https://github.com/MartinLeedotOrg/blog-martinlee-org/tree/master/infra).
 
-For small scale projects I like to store my terraform state in S3, so first we'll need a bucket for that:
-
+For small scale projects I like to store my terraform state in S3, so first we'll need a bucket for that:  
 ```aws s3api create-bucket terraform-conf-bucket```
 
 You'll need to specify a globally unique bucket name.
 
-We'll also need an SSL cert for the CloudFront distribution, luckily AWS gives us one for free:
-`aws acm request-certificate --domainname domainname.tld`
+We'll also need an SSL cert for the CloudFront distribution, luckily AWS gives us one for free:  
+`aws acm request-certificate --region us-east-1 --domain-name www.martinlee.org`
+
+You'll need to do this in us-east-1 so that CloudFront can get your certificate.
 
 That command will return the ARN for the certificate, but for it to become active you'll first need to [validate domain ownership](http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html)
 
@@ -41,10 +42,14 @@ A quick read through this should make it fairly clear what's happening, no real 
 Here I've used `ssl_support_method = "sni-only"`.  This means we can take advantage of SNI to allow CloudFront to serve our website from a shared IP. One the one hand, we won't be able to serve content to [older devices](https://en.wikipedia.org/wiki/Server_Name_Indication#Support) (Android before 4.x, IE on XP, etc.) but on the other it'll save us [$600/mo](https://aws.amazon.com/cloudfront/custom-ssl-domains/)
 
 #### Execution
-`terraform init` - to set up the terraform environment, download the required plugins, etc.
-`terraform plan` - will show you what terraform's about to try.
-`terraform apply` - will actually do the thing.
-`terraform delete` - will tear everything down if this is just for experimentation
+ * `terraform init`
+   * Set up the terraform environment, download the required plugins and initialize the backend.
+ * `terraform plan`
+   * See what terraform's about to try.
+ * `terraform apply`
+   * Do the thing.
+ * `terraform delete`
+   * Tear everything down if you'd like.
 
 The CloudFront distribution will take some time to deploy.  You can check on its progress with `aws cloudfront get-distribution --id=distribution-id`.
 

@@ -7,10 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>&amp;copy; Martin Lee 2017</copyright>
-    <lastBuildDate>Sat, 16 Sep 2017 09:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 17 Sep 2017 18:56:42 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.martinlee.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How Its Made Pt2 or Hugo in S3 and CloudFront</title>
+      <link>https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/</link>
+      <pubDate>Sun, 17 Sep 2017 18:56:42 +0100</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/</guid>
+      <description>Intro In Part 1 I built my architecture using Route53, S3 and CloudFront. This would suit pretty much any static site, but I chose to use Hugo. Why? I hadn&amp;rsquo;t used it before&amp;hellip;
+Bringing it all together Go back and read the first part for how to get yourself a place where you can put static HTML in S3, and then serve it over a CDN with HTTPS through CloudFront - all without using the GUI!</description>
+    </item>
+    
+    <item>
+      <title>NFS for Rancher in Google Cloud Platform</title>
+      <link>https://blog.martinlee.org/posts/rancher-gcp-nfs/</link>
+      <pubDate>Sun, 17 Sep 2017 18:14:39 +0100</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/rancher-gcp-nfs/</guid>
+      <description>Intro Recently, I deployed some Rancher hosts in Google Cloud Platform, taking advantage of some free credit.
+I&amp;rsquo;ve been spoiled by Rancher&amp;rsquo;s integration with Amazon Web Services EFS and EBS - making storage for containers very simple. GCP doesn&amp;rsquo;t yet have a similar integration so I had to find another way.
+File Servers on Google Compute Engine Google offer some possible solutions in their documentation. I chose to go with the Single Node File Server.</description>
+    </item>
     
     <item>
       <title>How Its Made Pt1</title>
@@ -18,8 +39,7 @@
       <pubDate>Sat, 16 Sep 2017 09:00:00 +0100</pubDate>
       
       <guid>https://blog.martinlee.org/posts/how-its-made-pt1/</guid>
-      <description>Intro First thing first, we&amp;rsquo;re going to need some infrastructure to host the blog. I&amp;rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&amp;rsquo;m going to host it entirely in AWS.
-Components:  S3 Bucket to host the static blog CloudFront Distribution to serve the blog over HTTPS Route53 Alias record to point blog.martinlee.org at the CloudFront Distribution  Tools:  awscli terraform  Setup We&amp;rsquo;ll use terraform to generate everything.</description>
+      <description>Intro First thing first, we&amp;rsquo;re going to need some infrastructure to host the blog. I&amp;rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&amp;rsquo;m going to host it entirely in AWS, and as a static site (think Hugo, Jekyll, etc.) By the time your reading this - I&amp;rsquo;ll have made a decision on what to use, but this post was drafted while I was still deciding.</description>
     </item>
     
   </channel>

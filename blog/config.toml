@@ -24,7 +24,7 @@ copyright = "&copy; Martin Lee 2017"
 #  youtube = "Your YouTube username"
 #  linkedin = "Your LinkedIn username"
   # Disqus shortname
-#  disqus = ""
+  disqus = "blog-martinlee-org"
   # Google Analytics API key.
   ga_api_key = "UA-90843406-3"
   author = "Martin Lee"

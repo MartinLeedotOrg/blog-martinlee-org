@@ -70,7 +70,7 @@
 
 <h3 id="intro">Intro</h3>
 
-<p>First thing first, we&rsquo;re going to need some infrastructure to host the blog. I&rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&rsquo;m going to host it entirely in AWS.</p>
+<p>First thing first, we&rsquo;re going to need some infrastructure to host the blog. I&rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&rsquo;m going to host it entirely in AWS, and as a static site (think Hugo, Jekyll, etc.) By the time your reading this - I&rsquo;ll have made a decision on what to use, but this post was drafted while I was still deciding.</p>
 
 <h4 id="components">Components:</h4>
 
@@ -91,14 +91,15 @@
 
 <p>We&rsquo;ll use terraform to generate everything. I&rsquo;ve uploaded my terraform files to <a href="https://github.com/MartinLeedotOrg/blog-martinlee-org/tree/master/infra">GitHub</a>.</p>
 
-<p>For small scale projects I like to store my terraform state in S3, so first we&rsquo;ll need a bucket for that:</p>
-
-<p><code>aws s3api create-bucket terraform-conf-bucket</code></p>
+<p>For small scale projects I like to store my terraform state in S3, so first we&rsquo;ll need a bucket for that:<br />
+<code>aws s3api create-bucket terraform-conf-bucket</code></p>
 
 <p>You&rsquo;ll need to specify a globally unique bucket name.</p>
 
-<p>We&rsquo;ll also need an SSL cert for the CloudFront distribution, luckily AWS gives us one for free:
-<code>aws acm request-certificate --domainname domainname.tld</code></p>
+<p>We&rsquo;ll also need an SSL cert for the CloudFront distribution, luckily AWS gives us one for free:<br />
+<code>aws acm request-certificate --region us-east-1 --domain-name www.martinlee.org</code></p>
+
+<p>You&rsquo;ll need to do this in us-east-1 so that CloudFront can get your certificate.</p>
 
 <p>That command will return the ARN for the certificate, but for it to become active you&rsquo;ll first need to <a href="http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html">validate domain ownership</a></p>
 
@@ -116,10 +117,28 @@
 
 <h4 id="execution">Execution</h4>
 
-<p><code>terraform init</code> - to set up the terraform environment, download the required plugins, etc.
-<code>terraform plan</code> - will show you what terraform&rsquo;s about to try.
-<code>terraform apply</code> - will actually do the thing.
-<code>terraform delete</code> - will tear everything down if this is just for experimentation</p>
+<ul>
+<li><code>terraform init</code>
+
+<ul>
+<li>Set up the terraform environment, download the required plugins and initialize the backend.</li>
+</ul></li>
+<li><code>terraform plan</code>
+
+<ul>
+<li>See what terraform&rsquo;s about to try.</li>
+</ul></li>
+<li><code>terraform apply</code>
+
+<ul>
+<li>Do the thing.</li>
+</ul></li>
+<li><code>terraform delete</code>
+
+<ul>
+<li>Tear everything down if you&rsquo;d like.</li>
+</ul></li>
+</ul>
 
 <p>The CloudFront distribution will take some time to deploy.  You can check on its progress with <code>aws cloudfront get-distribution --id=distribution-id</code>.</p>
 
@@ -145,10 +164,23 @@
   </section>
   <footer>
     
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'blog-martinlee-org';
+    (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     <nav class="p-pagination c-pagination">
       <div class="c-pagination__ctrl">
         <div class="c-pagination__newer">
           
+          <a href="https://blog.martinlee.org/posts/rancher-gcp-nfs/">Newer</a>
           
         </div>
         <div class="c-pagination__older">

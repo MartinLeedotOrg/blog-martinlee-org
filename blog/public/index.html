@@ -56,6 +56,51 @@
 
 <article class="c-article p-list-article">
   <header>
+    <h2 class="c-title c-article__title"><a href="https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/">How Its Made Pt2 or Hugo in S3 and CloudFront</a></h2>
+    <p class="c-article__meta">
+      Posted on
+      <time datetime="2017-09-17T18:56:42&#43;01:00">
+        Sep 17, 2017
+      </time>
+    </p>
+  </header>
+  <div class="c-article__summary">
+    Intro In Part 1 I built my architecture using Route53, S3 and CloudFront. This would suit pretty much any static site, but I chose to use Hugo. Why? I hadn&rsquo;t used it before&hellip;
+Bringing it all together Go back and read the first part for how to get yourself a place where you can put static HTML in S3, and then serve it over a CDN with HTTPS through CloudFront - all without using the GUI!
+  </div>
+  
+  <a href="https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/" class="c-article__btn p-list-article__btn">Read more</a></li>
+  
+</article>
+
+
+
+
+<article class="c-article p-list-article">
+  <header>
+    <h2 class="c-title c-article__title"><a href="https://blog.martinlee.org/posts/rancher-gcp-nfs/">NFS for Rancher in Google Cloud Platform</a></h2>
+    <p class="c-article__meta">
+      Posted on
+      <time datetime="2017-09-17T18:14:39&#43;01:00">
+        Sep 17, 2017
+      </time>
+    </p>
+  </header>
+  <div class="c-article__summary">
+    Intro Recently, I deployed some Rancher hosts in Google Cloud Platform, taking advantage of some free credit.
+I&rsquo;ve been spoiled by Rancher&rsquo;s integration with Amazon Web Services EFS and EBS - making storage for containers very simple. GCP doesn&rsquo;t yet have a similar integration so I had to find another way.
+File Servers on Google Compute Engine Google offer some possible solutions in their documentation. I chose to go with the Single Node File Server.
+  </div>
+  
+  <a href="https://blog.martinlee.org/posts/rancher-gcp-nfs/" class="c-article__btn p-list-article__btn">Read more</a></li>
+  
+</article>
+
+
+
+
+<article class="c-article p-list-article">
+  <header>
     <h2 class="c-title c-article__title"><a href="https://blog.martinlee.org/posts/how-its-made-pt1/">How Its Made Pt1</a></h2>
     <p class="c-article__meta">
       Posted on
@@ -65,8 +110,7 @@
     </p>
   </header>
   <div class="c-article__summary">
-    Intro First thing first, we&rsquo;re going to need some infrastructure to host the blog. I&rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&rsquo;m going to host it entirely in AWS.
-Components:  S3 Bucket to host the static blog CloudFront Distribution to serve the blog over HTTPS Route53 Alias record to point blog.martinlee.org at the CloudFront Distribution  Tools:  awscli terraform  Setup We&rsquo;ll use terraform to generate everything.
+    Intro First thing first, we&rsquo;re going to need some infrastructure to host the blog. I&rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&rsquo;m going to host it entirely in AWS, and as a static site (think Hugo, Jekyll, etc.) By the time your reading this - I&rsquo;ll have made a decision on what to use, but this post was drafted while I was still deciding.
   </div>
   
   <a href="https://blog.martinlee.org/posts/how-its-made-pt1/" class="c-article__btn p-list-article__btn">Read more</a></li>
