@@ -45,6 +45,11 @@ website {
 
 }
 
+resource "aws_s3_bucket" "logs" {
+  bucket = "${var.bucket_name}-logs"
+  acl = "log-delivery-write"
+}
+
 resource "aws_route53_record" "blog_record" {
   zone_id = "${var.hosted_zone_id}"
   type = "A"
@@ -58,7 +63,7 @@ resource "aws_route53_record" "blog_record" {
 
 resource "aws_cloudfront_distribution" "frontend" {
   origin {
-    domain_name = "${aws_s3_bucket.website.id}.${aws_s3_bucket.website.website_domain}"
+    domain_name = "${aws_s3_bucket.website.website_endpoint}"
     origin_id = "S3origin"
 
     # Using a custom origin config so we can take advantage of the bucket automatically pointing /posts/
@@ -104,5 +109,9 @@ resource "aws_cloudfront_distribution" "frontend" {
     acm_certificate_arn = "${var.cert_arn}"
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1"
+  }
+
+  logging_config {
+    bucket = "${aws_s3_bucket.logs.bucket_domain_name}"
   }
 }
