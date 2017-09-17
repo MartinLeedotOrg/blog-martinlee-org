@@ -1,5 +1,0 @@
-hosted_zone_id  = "Route 53 Zone ID"
-domain          = "Blog Domain Name"
-bucket_name     = "Blog Bucket Name"
-region          = "us-east-1"
-cert_arn        = "arn:aws:acm:us-east-1:835591270861:certificate/....."

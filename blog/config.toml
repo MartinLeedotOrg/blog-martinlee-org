@@ -1,0 +1,39 @@
+baseurl = "https://blog.martinlee.org/"
+languageCode = "en-gb"
+Title = "Martin Lee's Blog"
+# Copyright notice. This is displayer in the footer.
+copyright = "&copy; Martin Lee 2017"
+
+[params]
+  paginate = 10
+  # Social accounts. Link to these accounts are displayed in the header and
+  # footer
+#  twitter = "Your Twitter username"
+#  facebook = "Your Facebook username"
+#  instagram = "Your Instagram username"
+#  googleplus = "Your Google+ user id"
+  github = "MartinLeedotOrg"
+#  npm = "Your npm username"
+#  codepen = "Your CodePen username"
+#  dribbble = "Your Dribbble username"
+#  fivehundredpx = "Your 500px username" # 500px
+#  flickr = "Your Flickr username"
+#  pinterest = "Your Pinterest username"
+#  tumblr = "Your Tumblr username"
+#  vimeo = "Your Vimeo username"
+#  youtube = "Your YouTube username"
+#  linkedin = "Your LinkedIn username"
+  # Disqus shortname
+#  disqus = ""
+  # Google Analytics API key.
+#  ga_api_key = "Your Google Analytics tracking id"
+  author = "Martin Lee"
+  authorwebsite = "http://martinlee.org"
+#  avatar = "/path/to/avatar"
+  contact = "mailto:martin@martinlee.org"
+#  bio = "Your short bio"
+  # Short subtitle/tagline. This is displayed in the header.
+  subtitle = "Perfect is the enemy of good"
+  # Logo image. This is displayed ogp image.
+#  logo = "/path/to/logo"
+#  favicon = "/path/to/favicon"

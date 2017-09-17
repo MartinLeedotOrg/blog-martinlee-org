@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Martin Lee&#39;s Blog</title>
+    <link>https://blog.martinlee.org/posts/</link>
+    <description>Recent content in Posts on Martin Lee&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; Martin Lee 2017</copyright>
+    <lastBuildDate>Sat, 16 Sep 2017 09:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://blog.martinlee.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How Its Made Pt1</title>
+      <link>https://blog.martinlee.org/posts/how-its-made-pt1/</link>
+      <pubDate>Sat, 16 Sep 2017 09:00:00 +0100</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/how-its-made-pt1/</guid>
+      <description>Intro First thing first, we&amp;rsquo;re going to need some infrastructure to host the blog. I&amp;rsquo;ve decided to over-engineer this because I enjoy that sort of thing. I&amp;rsquo;m going to host it entirely in AWS.
+Components:  S3 Bucket to host the static blog CloudFront Distribution to serve the blog over HTTPS Route53 Alias record to point blog.martinlee.org at the CloudFront Distribution  Tools:  awscli terraform  Setup We&amp;rsquo;ll use terraform to generate everything.</description>
+    </item>
+    
+  </channel>
+</rss>

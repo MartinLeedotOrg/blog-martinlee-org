@@ -10,7 +10,7 @@ variable "domain" {
 variable "bucket_name" {
 }
 
-variable "certarn" {
+variable "cert_arn" {
 }
 
 provider "aws" {
@@ -58,7 +58,7 @@ resource "aws_route53_record" "blog_record" {
 
 resource "aws_cloudfront_distribution" "frontend" {
   origin {
-    domain_name = "${var.bucket_name}.s3.amazonaws.com"
+    domain_name = "${aws_s3_bucket.website.id}.${aws_s3_bucket.website.website_domain}"
     origin_id = "S3origin"
   }
 
@@ -91,7 +91,7 @@ resource "aws_cloudfront_distribution" "frontend" {
 
   }
   viewer_certificate {
-    acm_certificate_arn = "${var.certarn}"
+    acm_certificate_arn = "${var.cert_arn}"
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1"
   }

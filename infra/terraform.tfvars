@@ -1,0 +1,5 @@
+hosted_zone_id  = "Z36CMMWDTFWKV3"
+domain          = "blog.martinlee.org"
+bucket_name     = "blog-martinlee-org"
+region          = "us-east-1"
+cert_arn        = "arn:aws:acm:us-east-1:835591270861:certificate/efa93d58-eb42-4319-a844-c0f77d6083a8"
