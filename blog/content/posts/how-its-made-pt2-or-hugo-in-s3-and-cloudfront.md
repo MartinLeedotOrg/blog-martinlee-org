@@ -1,5 +1,5 @@
 ---
-title: "How Its Made Pt2 or Hugo in S3 and CloudFront"
+title: "How It's Made Pt2 or Hugo in S3 and CloudFront"
 date: 2017-09-17T18:56:42+01:00
 draft: false
 ---
