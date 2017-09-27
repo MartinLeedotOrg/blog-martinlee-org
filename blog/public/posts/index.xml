@@ -7,13 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>&amp;copy; Martin Lee 2017</copyright>
-    <lastBuildDate>Sun, 17 Sep 2017 18:56:42 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 27 Sep 2017 20:59:50 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.martinlee.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>How Its Made Pt2 or Hugo in S3 and CloudFront</title>
+      <title>Fun With Pritunl Pt1</title>
+      <link>https://blog.martinlee.org/posts/fun-with-pritunl-pt1/</link>
+      <pubDate>Wed, 27 Sep 2017 20:59:50 +0100</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/fun-with-pritunl-pt1/</guid>
+      <description>Intro pritunl is an &amp;ldquo;Enterprise Distributed OpenVPN and IPsec Server&amp;rdquo;. It&amp;rsquo;s a solution to allow you to VPN in to your network and to link multiple networks together.
+All well and good, but what could you actually use it for?
+My aim for this series of posts is to show you how I&amp;rsquo;m using pritunl to:
+ VPN in to a &amp;ldquo;Transit VPC&amp;rdquo; in AWS Link that Transit VPC and a VPC in Google Cloud Use AWS services like RDS or S3 from Google Cloud - without going via the internet.</description>
+    </item>
+    
+    <item>
+      <title>How It&#39;s Made Pt2 or Hugo in S3 and CloudFront</title>
       <link>https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/</link>
       <pubDate>Sun, 17 Sep 2017 18:56:42 +0100</pubDate>
       
@@ -34,7 +46,7 @@ File Servers on Google Compute Engine Google offer some possible solutions in th
     </item>
     
     <item>
-      <title>How Its Made Pt1</title>
+      <title>How It&#39;s Made Pt1</title>
       <link>https://blog.martinlee.org/posts/how-its-made-pt1/</link>
       <pubDate>Sat, 16 Sep 2017 09:00:00 +0100</pubDate>
       

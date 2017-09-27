@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.martinlee.org/posts/fun-with-pritunl-pt1/</loc>
+    <lastmod>2017-09-27T20:59:50+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.martinlee.org/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/</loc>
     <lastmod>2017-09-17T18:56:42+01:00</lastmod>
   </url>
@@ -24,13 +29,13 @@
   
   <url>
     <loc>https://blog.martinlee.org/</loc>
-    <lastmod>2017-09-17T18:56:42+01:00</lastmod>
+    <lastmod>2017-09-27T20:59:50+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.martinlee.org/posts/</loc>
-    <lastmod>2017-09-17T18:56:42+01:00</lastmod>
+    <lastmod>2017-09-27T20:59:50+01:00</lastmod>
     <priority>0</priority>
   </url>
   

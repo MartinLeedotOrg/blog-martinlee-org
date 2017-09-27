@@ -71,3 +71,5 @@ $ while true; do aws cloudfront get-distribution --id=distribution-id | grep Sta
 That's it! We're done. What we could have done with a site builder in five minutes, we've spent an hour on.
 
 I'll make another post in the future once I have an idea of how much this is costing me, but I'm going to ballpark it at a few dollars per month.
+
+I've made a [Part 2](/posts/how-its-made-pt2-or-hugo-in-s3-and-cloudfront/) where I cover how I deploy a hugo static site to this setup.
