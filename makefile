@@ -8,4 +8,4 @@ dev:
 	cd ./blog && hugo server -t hugo_theme_pickles -w -D
 
 invalid:
-	aws cloudfront create-invalidation --distribution-id E734L0F2WYJ6 --paths /posts/* / /index.html
+	aws cloudfront create-invalidation --distribution-id E734L0F2WYJ6 --paths /posts/* / /index.html /images/*

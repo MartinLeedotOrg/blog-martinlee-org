@@ -6,7 +6,7 @@ draft: false
 
 ### Intro
 
-In [Part 1](posts/how-its-made-pt1/) I built my architecture using Route53, S3 and CloudFront. This would suit pretty much any static site, but I chose to use [Hugo](https://gohugo.io). Why? I hadn't used it before...
+In [Part 1](/posts/how-its-made-pt1/) I built my architecture using Route53, S3 and CloudFront. This would suit pretty much any static site, but I chose to use [Hugo](https://gohugo.io). Why? I hadn't used it before...
 
 ### Bringing it all together
 

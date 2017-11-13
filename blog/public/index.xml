@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>&amp;copy; Martin Lee 2017</copyright>
-    <lastBuildDate>Wed, 27 Sep 2017 20:59:50 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 07 Nov 2017 12:12:10 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.martinlee.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rancher Hosts in an EC2 Private Subnet</title>
+      <link>https://blog.martinlee.org/posts/rancher-ec2-private-subnet/</link>
+      <pubDate>Tue, 07 Nov 2017 12:12:10 +0000</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/rancher-ec2-private-subnet/</guid>
+      <description>Intro Just a quick post with an EC2 launch configuration for running a Rancher Host in an EC2 Private Subnet.
+Doing it this way will let you set up autoscaling groups etc. This also provides an alternative to using docker-machine across private IPs, this way we don&amp;rsquo;t have to set up any private SSH communication between the Rancher Server and the Host, which may (should?) exist in different networks.</description>
+    </item>
     
     <item>
       <title>Fun With Pritunl Pt1</title>
