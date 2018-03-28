@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   
-  <title>Rancher Hosts in an EC2 Private Subnet</title>
-  <meta property="og:title" content="Rancher Hosts in an EC2 Private Subnet" />
-  <meta name="twitter:title" content="Rancher Hosts in an EC2 Private Subnet" />
+  <title>Testing code equivalence with Python&#39;s AST</title>
+  <meta property="og:title" content="Testing code equivalence with Python&#39;s AST" />
+  <meta name="twitter:title" content="Testing code equivalence with Python&#39;s AST" />
   
 
   
@@ -17,7 +17,7 @@
 
   <meta name="author" content="Martin Lee"/>
   <meta property="og:site_name" content="Martin Lee&#39;s Blog" />
-  <meta property="og:url" content="https://blog.martinlee.org/posts/rancher-ec2-private-subnet/" />
+  <meta property="og:url" content="https://blog.martinlee.org/posts/ast-equivalence-python/" />
 
   
   <meta name="twitter:card" content="summary" />
@@ -54,12 +54,12 @@
 
 <article class="p-article">
   <header>
-    <h1>Rancher Hosts in an EC2 Private Subnet</h1>
+    <h1>Testing code equivalence with Python&#39;s AST</h1>
     <div>
       <div class="c-time">
         Posted on
-        <time datetime="2017-11-07T12:12:10Z">
-          Nov 7, 2017
+        <time datetime="2018-03-18T11:58:30Z">
+          Mar 18, 2018
         </time>
       </div>
       
@@ -68,35 +68,163 @@
   <section id="js-article" class="p-article__body">
     
 
-<h3 id="intro">Intro</h3>
+<h2 id="intro">Intro</h2>
 
-<p>Just a quick post with an EC2 launch configuration for running a Rancher Host in an EC2 Private Subnet.</p>
+<p>Going through the excellent videos from <a href="https://www.pycascades.com/">PyCascades</a> I chanced upon Emily Morehouse-Valcarcel&rsquo;s fantastic presentation <a href="https://www.youtube.com/watch?v=Vkgb3fI8d7M">The AST and Me</a>.</p>
 
-<p>Doing it this way will let you set up autoscaling groups etc. This also provides an alternative to using docker-machine across private IPs, this way we don&rsquo;t have to set up any private SSH communication between the Rancher Server and the Host, which may (should?) exist in different networks.</p>
+<p>Abstract:</p>
 
-<p>Super simple stuff, but I&rsquo;ve not seen much online in terms of how people are implementing Rancher and would like to slowly add to that.</p>
+<blockquote>
+<p>Get under the hood and learn about Python&rsquo;s beloved Abstract Syntax Tree. We&rsquo;ll discuss the AST&rsquo;s role in Python&rsquo;s compilation process, how it affects Bytecode, and how you can use it&rsquo;s optimizations to improve your code&rsquo;s speed at runtime. Write better code!</p>
+</blockquote>
 
-<h3 id="launch-configuration">Launch Configuration</h3>
+<p>Rather than go in detail on the Abstract Syntax Tree, parse trees and bytecode in this post, I suggest you watch Emily&rsquo;s talk to gain an understanding of those concepts.</p>
 
-<p>The important thing here is to set <code>User data</code> (under <code>Advanced Details</code> at the <code>Configure details</code> stage) like so:</p>
+<p>I was vaguely aware of how Python code was run, but Emily&rsquo;s talk inspired me to start playing with the AST. I decided to write a toy test case that I could use to prove that two pieces of code were, to CPython at least, identical.</p>
 
-<pre><code>#!/bin/bash
-curl https://releases.rancher.com/install-docker/17.06.sh | sh
-docker run -e CATTLE_AGENT_IP=&quot;$(curl http://169.254.169.254/latest/meta-data/local-ipv4)&quot;  --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher rancher/agent:v1.2.6 https://rancher.example.com/v1/scripts/_CHANGE_THIS_BIT_
+<p>All the code in this post is also in my GitHub repo <a href="https://github.com/MartinLeedotOrg/ast_equivalence/">ast_equivalence</a>.</p>
+
+<h3 id="the-tester">The Tester</h3>
+
+<pre><code>#!/usr/bin/env python3
+import ast
+import unittest
+import argparse
+import dis
+
+parser = argparse.ArgumentParser()
+parser.add_argument(&quot;File1&quot;)
+parser.add_argument(&quot;File2&quot;)
+parser.add_argument(&quot;-v&quot;, dest=&quot;verbose&quot;, action=&quot;store_true&quot;)
+args = parser.parse_args()
+
+
+def get_bytecode(filename):
+    with open(filename) as f:
+        code = ast.parse(f.read())
+        bytecode = dis.Bytecode(compile(code, '&lt;string&gt;', 'exec')).dis()
+    return bytecode
+
+
+bytecode1 = get_bytecode(args.File1)
+bytecode2 = get_bytecode(args.File2)
+
+if args.verbose:
+    print(bytecode1)
+    print(bytecode2)
+
+
+class TestStringMethods(unittest.TestCase):
+    if args.verbose:
+        maxDiff = None
+
+    def test_upper(self):
+        self.assertEqual(bytecode1, bytecode2)
+
+
+if __name__ == &quot;__main__&quot;:
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestStringMethods)
+    unittest.TextTestRunner().run(suite)
+
 </code></pre>
 
-<p>This will:</p>
+<p>It took a little time to work out how to get a string of bytecode (hint, it&rsquo;s <a href="https://docs.python.org/3/library/dis.html#dis.Bytecode.dis"><code>dis.Bytecode.dis()</code></a>) but otherwise, pretty straightforward. I added a verbose option to print the bytecode and to allow the unittest to print the full diff.</p>
 
-<ul>
-<li>Install a supported version of Docker</li>
-<li>Register the host with the <em>Private IP</em> against your rancher instance.</li>
-</ul>
+<h3 id="example-1">Example 1</h3>
 
-<h3 id="other-bits">Other bits</h3>
+<p>A simple one - let&rsquo;s prove that, for the purposes of executing the code, tabs and spaces are the same.</p>
 
-<p>You&rsquo;ll need to set up a security group, just make sure your hosts can talk to each other on <code>UDP/500</code> and <code>UDP/4500</code>.</p>
+<h4 id="ex1-spaces-py">ex1_spaces.py</h4>
 
-<p>You&rsquo;ll also need some way for these Rancher Hosts to access the internet, like a NAT Gateway, or an alternative method of getting everything they need.</p>
+<pre><code>#!/usr/bin/env python3
+
+for i in range(10):
+    print(i)
+</code></pre>
+
+<h4 id="ex1-tabs-py">ex1_tabs.py</h4>
+
+<pre><code>#!/usr/bin/env python3
+
+for i in range(10):
+	print(i)
+</code></pre>
+
+<p>Running <code>test.py ex1*</code> shows us that these two snippets are identical:</p>
+
+<pre><code>➜  ast_equivalence git:(master) ./test.py ex1*
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</code></pre>
+
+<p>No surprises here.</p>
+
+<p>Recently, I came across some code which was both untested and mixed tabs and spaces for indentation.  Converting all indentation to spaces was simple enough, but now I can prove that I haven&rsquo;t introduced any bugs.</p>
+
+<p>Here&rsquo;s what the output of <code>dis.Bytecode.dis()</code> looks like:</p>
+
+<pre><code>  3           0 SETUP_LOOP              24 (to 26)
+              2 LOAD_NAME                0 (range)
+              4 LOAD_CONST               0 (10)
+              6 CALL_FUNCTION            1
+              8 GET_ITER
+        &gt;&gt;   10 FOR_ITER                12 (to 24)
+             12 STORE_NAME               1 (i)
+
+  4          14 LOAD_NAME                2 (print)
+             16 LOAD_NAME                1 (i)
+             18 CALL_FUNCTION            1
+             20 POP_TOP
+             22 JUMP_ABSOLUTE           10
+        &gt;&gt;   24 POP_BLOCK
+        &gt;&gt;   26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+</code></pre>
+
+<h3 id="example-2">Example 2</h3>
+
+<p>A little more complex. CPython performs <a href="https://en.wikipedia.org/wiki/Peephole_optimization">Peephole Optimisation</a>. Let&rsquo;s use that to prove that two logical statements are identical:</p>
+
+<h4 id="ex2-ainb-py">ex2_ainb.py</h4>
+
+<pre><code>#!/usr/bin/env python3
+
+a = 'apple'
+
+b = {'apple', 'banana'}
+
+print (a in b)
+</code></pre>
+
+<h4 id="ex2-notanotinb-py">ex2_notanotinb.py</h4>
+
+<pre><code>#!/usr/bin/env python3
+
+a = 'apple'
+
+b = {'apple', 'banana'}
+
+print (not a not in b)
+</code></pre>
+
+<p>Once again, these are identical:</p>
+
+<pre><code>➜  ast_equivalence git:(master) ./test.py ex2*
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</code></pre>
+
+<p>Again, not hugely surprising, but if you&rsquo;re looking at a complex string of logic and algebra, this method might save you a few headaches.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>This is not meant to test all cases where code should or shouldn&rsquo;t behave the same. As an example, we&rsquo;re testing for <code>STORE_NAME</code> being identical, although that doesn&rsquo;t always matter.  Consider an understanding of the <code>ast</code> and <code>dis</code> modules to be another tool in your debugging arsenal.</p>
 
   </section>
   <footer>
@@ -117,12 +245,11 @@ docker run -e CATTLE_AGENT_IP=&quot;$(curl http://169.254.169.254/latest/meta-da
       <div class="c-pagination__ctrl">
         <div class="c-pagination__newer">
           
-          <a href="https://blog.martinlee.org/posts/ast-equivalence-python/">Newer</a>
           
         </div>
         <div class="c-pagination__older">
           
-          <a href="https://blog.martinlee.org/posts/fun-with-pritunl-pt1/">Older</a>
+          <a href="https://blog.martinlee.org/posts/rancher-ec2-private-subnet/">Older</a>
           
         </div>
       </div>

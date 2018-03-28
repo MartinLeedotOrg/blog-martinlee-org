@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>&amp;copy; Martin Lee 2017</copyright>
-    <lastBuildDate>Tue, 07 Nov 2017 12:12:10 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Mar 2018 11:58:30 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.martinlee.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Testing code equivalence with Python&#39;s AST</title>
+      <link>https://blog.martinlee.org/posts/ast-equivalence-python/</link>
+      <pubDate>Sun, 18 Mar 2018 11:58:30 +0000</pubDate>
+      
+      <guid>https://blog.martinlee.org/posts/ast-equivalence-python/</guid>
+      <description>Intro Going through the excellent videos from PyCascades I chanced upon Emily Morehouse-Valcarcel&amp;rsquo;s fantastic presentation The AST and Me.
+Abstract:
+ Get under the hood and learn about Python&amp;rsquo;s beloved Abstract Syntax Tree. We&amp;rsquo;ll discuss the AST&amp;rsquo;s role in Python&amp;rsquo;s compilation process, how it affects Bytecode, and how you can use it&amp;rsquo;s optimizations to improve your code&amp;rsquo;s speed at runtime. Write better code!
+ Rather than go in detail on the Abstract Syntax Tree, parse trees and bytecode in this post, I suggest you watch Emily&amp;rsquo;s talk to gain an understanding of those concepts.</description>
+    </item>
     
     <item>
       <title>Rancher Hosts in an EC2 Private Subnet</title>
